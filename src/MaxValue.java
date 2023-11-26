@@ -1,5 +1,5 @@
 /**
- * Class to find the maximum of three Integer values.
+ * Class to find the maximum of three float values.
  */
 public class MaxValue {
 
