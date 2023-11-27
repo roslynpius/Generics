@@ -1,41 +1,37 @@
 /**
- * Generic class to find the maximum of three comparable objects.
+ * Generic class to find the maximum of multiple comparable objects.
  *
  * @param <T> The type of the objects, must extend Comparable.
  */
 public class MaxValue<T extends Comparable<T>> {
 
-    private T value1;
-    private T value2;
-    private T value3;
+    private T[] values;
 
     /**
      * Constructor for the MaxValue class.
      *
-     * @param value1 The first object.
-     * @param value2 The second object.
-     * @param value3 The third object.
+     * @param values The objects to be compared
      */
-    public MaxValue(T value1, T value2, T value3) {
-        this.value1 = value1;
-        this.value2 = value2;
-        this.value3 = value3;
+    public MaxValue(T... values) {
+        this.values=values;
     }
 
     /**
-     * Finds the maximum of the three comparable objects.
+     * Finds the maximum of the comparable objects.
      *
-     * @return The maximum value among the three.
+     * @return The maximum value.
      */
     public T findMax() {
-        T max = value1;
 
-        if (value2.compareTo(max) > 0) {
-            max = value2;
+        if (values.length==0){
+            System.out.println("Nothing to compare.");
         }
+        T max = values[0];
 
-        if (value3.compareTo(max) > 0) {
-            max = value3;
+        for(int i=0;i<values.length;i++)
+        {
+            if(values[i].compareTo(max)>0)
+                max=values[i];
         }
 
         return max;
@@ -46,7 +42,11 @@ public class MaxValue<T extends Comparable<T>> {
      */
     public void testMaxValue() {
         T maxVal = findMax();
-        System.out.println("Test Case: " + value1 + ", " + value2 + ", " + value3);
+        System.out.println("Test Case: ");
+        for(int i=0;i<values.length;i++)
+        {
+            System.out.println(values[i]);
+        }
         System.out.println("Maximum Value: " + maxVal);
         System.out.println();
     }
@@ -54,13 +54,12 @@ public class MaxValue<T extends Comparable<T>> {
     /**
      * Static method to internally call the testMaxValue method passing three instance variables.
      *
-     * @param value1 The first object.
-     * @param value2 The second object.
-     * @param value3 The third object.
+     * @param values The objects to be compared.
      * @param <T> The type of the objects, must extend Comparable.
      */
-    public static <T extends Comparable<T>> void testMaximum(T value1, T value2, T value3) {
-        MaxValue<T> maxValue = new MaxValue<>(value1, value2, value3);
+   
+    public static <T extends Comparable<T>> void testMaximum(T... values) {
+        MaxValue<T> maxValue = new MaxValue<>(values);
         maxValue.testMaxValue();
     }
 
@@ -73,5 +72,7 @@ public class MaxValue<T extends Comparable<T>> {
 
         // Test Case 3: Max at 3rd position
         testMaximum("movies", "books", "songs");
+
+        testMaximum(3,4,1,5,7,3,6);
     }
 }
