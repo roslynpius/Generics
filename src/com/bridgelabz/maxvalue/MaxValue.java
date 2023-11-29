@@ -1,3 +1,5 @@
+package com.bridgelabz.maxvalue;
+
 /**
  *
  * @param <T> The type of the objects, must extend Comparable.
